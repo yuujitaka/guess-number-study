@@ -1,10 +1,10 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-const CustomButton = ({ children }) => {
+const CustomButton = ({ children, onPress }) => {
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={() => console.log("hi")}
+        onPress={onPress}
         style={({ pressed }) =>
           pressed && Platform.OS === "ios" ? styles.pressed : ""
         }
