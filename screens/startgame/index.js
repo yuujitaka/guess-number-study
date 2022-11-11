@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert } from "react-native";
 import CustomButton from "../../components/CustomButton";
 
-const StartGame = () => {
+const StartGame = ({ navigation }) => {
   const [inputNumber, setInputNumber] = useState("");
 
   const confirmHandler = () => {
@@ -18,6 +18,8 @@ const StartGame = () => {
       ]);
       return false;
     }
+
+    navigation.navigate("Main");
   };
 
   const resetInput = () => {
