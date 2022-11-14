@@ -46,23 +46,25 @@ const StartGame = ({ navigation }) => {
   const marginTop = height < 380 ? 30 : 100;
 
   return (
-    <View style={[styles.inputContainer, { marginTop: marginTop }]}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        value={inputNumber}
-        onChangeText={(text) => setInputNumber(text)}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <CustomButton onPress={resetInput}>Reset</CustomButton>
-        </View>
-        <View style={styles.buttonContainer}>
-          <CustomButton onPress={confirmHandler}>Confirm</CustomButton>
+    <KeyboardAvoidingView style={styles.screen} behavior="position">
+      <View style={[styles.inputContainer, { marginTop: marginTop }]}>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          value={inputNumber}
+          onChangeText={(text) => setInputNumber(text)}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <CustomButton onPress={resetInput}>Reset</CustomButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <CustomButton onPress={confirmHandler}>Confirm</CustomButton>
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

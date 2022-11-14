@@ -7,6 +7,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -28,32 +29,35 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <LinearGradient
-        colors={[Colors.primary[10], Colors.secondary]}
-        style={styles.rootScreen}
-      >
-        <ImageBackground
-          source={require("./assets/images/background.png")}
-          resizeMode="cover"
-          style={styles.backgroundContainer}
-          imageStyle={styles.backgroundImage}
+    <>
+      <StatusBar style="light" />
+      <NavigationContainer>
+        <LinearGradient
+          colors={[Colors.primary[10], Colors.secondary]}
+          style={styles.rootScreen}
         >
-          <SafeAreaView style={styles.rootScreen}>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: "transparent" },
-              }}
-            >
-              <Stack.Screen name="Start" component={StartGame} />
-              <Stack.Screen name="Main" component={MainGame} />
-              <Stack.Screen name="Over" component={GameOver} />
-            </Stack.Navigator>
-          </SafeAreaView>
-        </ImageBackground>
-      </LinearGradient>
-    </NavigationContainer>
+          <ImageBackground
+            source={require("./assets/images/background.png")}
+            resizeMode="cover"
+            style={styles.backgroundContainer}
+            imageStyle={styles.backgroundImage}
+          >
+            <SafeAreaView style={styles.rootScreen}>
+              <Stack.Navigator
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: "transparent" },
+                }}
+              >
+                <Stack.Screen name="Start" component={StartGame} />
+                <Stack.Screen name="Main" component={MainGame} />
+                <Stack.Screen name="Over" component={GameOver} />
+              </Stack.Navigator>
+            </SafeAreaView>
+          </ImageBackground>
+        </LinearGradient>
+      </NavigationContainer>
+    </>
   );
 }
 
