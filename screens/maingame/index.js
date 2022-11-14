@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, FlatList } from "react-native";
 import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -6,6 +6,7 @@ import Title from "../../components/Title";
 import CustomButton from "../../components/CustomButton";
 import generateRandomBetween from "../../utils/randomNumber";
 import Colors from "../../utils/colors";
+import RoundItem from "./RoundItem";
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -15,10 +16,16 @@ const MainGame = ({ route, navigation }) => {
   const [guessNumber, setGuessNumber] = useState(
     generateRandomBetween(1, 100, chosenNumber)
   );
+  const [rounds, setRounds] = useState([guessNumber]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
 
   useEffect(() => {
     if (guessNumber === chosenNumber) {
-      navigation.navigate("Over");
+      navigation.navigate("Over", { chosenNumber, rounds: rounds.length });
     }
   }, [guessNumber, chosenNumber]);
 
@@ -42,6 +49,7 @@ const MainGame = ({ route, navigation }) => {
     const guess = generateRandomBetween(minBoundary, maxBoundary, guessNumber);
 
     setGuessNumber(guess);
+    setRounds((prev) => [guess, ...prev]);
   };
 
   return (
@@ -64,6 +72,18 @@ const MainGame = ({ route, navigation }) => {
             </CustomButton>
           </View>
         </View>
+      </View>
+      <View style={styles.roundsContainer}>
+        <FlatList
+          data={rounds}
+          renderItem={(itemData) => (
+            <RoundItem
+              round={rounds.length - itemData.index}
+              guess={itemData.item}
+            />
+          )}
+          keyExtractor={(item) => item}
+        />
       </View>
     </View>
   );
@@ -96,5 +116,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 0.48,
+  },
+  roundsContainer: {
+    flex: 1,
   },
 });

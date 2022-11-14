@@ -1,4 +1,9 @@
-import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -52,13 +57,15 @@ export default function App() {
   );
 }
 
+const deviceWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
   },
   backgroundContainer: {
     flex: 1,
-    padding: 16,
+    padding: deviceWidth < 380 ? 12 : 16,
   },
   backgroundImage: {
     opacity: 0.15,

@@ -1,11 +1,26 @@
-import { useState } from "react";
-import { TextInput, View, StyleSheet, Alert } from "react-native";
+import { useState, useEffect } from "react";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Alert,
+  useWindowDimensions,
+  KeyboardAvoidingView,
+} from "react-native";
 
 import CustomButton from "../../components/CustomButton";
 import Colors from "../../utils/colors";
 
 const StartGame = ({ navigation }) => {
   const [inputNumber, setInputNumber] = useState("");
+  const { width, height } = useWindowDimensions();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      setInputNumber("");
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   const confirmHandler = () => {
     const chosenNumber = parseInt(inputNumber);
@@ -28,8 +43,10 @@ const StartGame = ({ navigation }) => {
     setInputNumber("");
   };
 
+  const marginTop = height < 380 ? 30 : 100;
+
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, { marginTop: marginTop }]}>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
@@ -55,7 +72,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     alignItems: "center",
     padding: 16,
-    marginTop: 100,
     backgroundColor: Colors.primary[10],
     borderRadius: 8,
     elevation: 4,
@@ -67,7 +83,7 @@ const styles = StyleSheet.create({
   numberInput: {
     height: 50,
     width: 64,
-    marginBottom: 8,
+    marginBottom: 16,
     borderBottomColor: Colors.secondary,
     borderBottomWidth: 2,
     color: Colors.secondary,
