@@ -5,13 +5,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import StartGame from "./screens/startgame";
 import MainGame from "./screens/maingame";
+import GameOver from "./screens/gameover";
+import Colors from "./utils/colors";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
-      <LinearGradient colors={["#ddb52f", "#480527"]} style={styles.rootScreen}>
+      <LinearGradient
+        colors={[Colors.primary[10], Colors.secondary]}
+        style={styles.rootScreen}
+      >
         <ImageBackground
           source={require("./assets/images/background.png")}
           resizeMode="cover"
@@ -27,6 +32,7 @@ export default function App() {
             >
               <Stack.Screen name="Start" component={StartGame} />
               <Stack.Screen name="Main" component={MainGame} />
+              <Stack.Screen name="Over" component={GameOver} />
             </Stack.Navigator>
           </SafeAreaView>
         </ImageBackground>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert } from "react-native";
+
 import CustomButton from "../../components/CustomButton";
+import Colors from "../../utils/colors";
 
 const StartGame = ({ navigation }) => {
   const [inputNumber, setInputNumber] = useState("");
@@ -19,7 +21,7 @@ const StartGame = ({ navigation }) => {
       return false;
     }
 
-    navigation.navigate("Main");
+    navigation.navigate("Main", { chosenNumber });
   };
 
   const resetInput = () => {
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     marginTop: 100,
-    backgroundColor: "#480527",
+    backgroundColor: Colors.primary[10],
     borderRadius: 8,
     elevation: 4,
     shadowColor: "black",
@@ -66,9 +68,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 64,
     marginBottom: 8,
-    borderBottomColor: "#ddb52f",
+    borderBottomColor: Colors.secondary,
     borderBottomWidth: 2,
-    color: "#ddb52f",
+    color: Colors.secondary,
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
