@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet, Alert } from "react-native";
 import { useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 import Title from "../../components/Title";
 import CustomButton from "../../components/CustomButton";
@@ -11,18 +12,15 @@ let maxBoundary = 100;
 
 const MainGame = ({ route, navigation }) => {
   const { chosenNumber } = route.params;
-  const initialGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
-    chosenNumber
+  const [guessNumber, setGuessNumber] = useState(
+    generateRandomBetween(1, 100, chosenNumber)
   );
-  const [guessNumber, setGuessNumber] = useState(initialGuess);
 
   useEffect(() => {
     if (guessNumber === chosenNumber) {
       navigation.navigate("Over");
     }
-  });
+  }, [guessNumber, chosenNumber]);
 
   const nextGuess = (direction) => {
     if (
@@ -56,10 +54,14 @@ const MainGame = ({ route, navigation }) => {
         <Text>Lower or higher?</Text>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
-            <CustomButton onPress={() => nextGuess("lower")}>-</CustomButton>
+            <CustomButton onPress={() => nextGuess("lower")}>
+              <Ionicons name="md-remove" size={18} color="white"></Ionicons>
+            </CustomButton>
           </View>
           <View style={styles.buttonContainer}>
-            <CustomButton onPress={() => nextGuess("higher")}>+</CustomButton>
+            <CustomButton onPress={() => nextGuess("higher")}>
+              <Ionicons name="md-add" size={18} color="white"></Ionicons>
+            </CustomButton>
           </View>
         </View>
       </View>

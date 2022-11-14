@@ -1,7 +1,11 @@
-import { Text } from "react-native";
+import { Text, View, Image } from "react-native";
 
 const GameOver = () => {
-  return <Text>Game Over</Text>;
+  return (
+    <View>
+      <Text>Game Over!</Text>
+    </View>
+  );
 };
 
 export default GameOver;
